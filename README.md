@@ -3,12 +3,12 @@
 ## Test Grade Calculator là một chương trình để tính toán điểm thi cho nhiều lớp với sĩ số hàng nghìn học sinh. Mục đích của chương trình giúp giảm thời gian chấm điểm,áp dụng các functions khác nhau trong Python để viết chương trình với các tác vụ sau: 
 
 ## 1. `readByFileName()`
-`readByFileName()` cho phép người dùng nhập tên của một tệp và truy cập đọc: Mở các tập tin văn bản bên ngoài được yêu cầu với exception-handling. Nếu tệp tồn tại, bạn có thể in ra một thông báo xác nhận. Nếu tệp không tồn tại, bạn nên cho người dùng biết rằng không thể tìm thấy tệp.
+`readByFileName()` cho phép người dùng nhập tên của một tệp và truy cập đọc: Mở các tập tin văn bản bên ngoài được yêu cầu với exception-handling. Nếu tệp tồn tại, sẽ thể in ra một thông báo xác nhận _'Successfully opened'_. Nếu tệp không tồn tại, bạn nên cho người dùng biết rằng không thể tìm thấy tệp và thông báo _'File cannot be found.'_.
 - Báo cáo tổng số dòng dữ liệu hợp lệ trong tệp.
 - Báo cáo tổng số dòng dữ liệu không hợp lệ trong tệp.
   
 ## 2. `matchAnswersFormat(answer)`
-`matchAnswersFormat(answer)` quét từng dòng của câu trả lời bài thi từ answer của đọc từ tệp theo tên ở `readByFileName()` để tìm dữ liệu hợp lệ và cung cấp phân tích dữ liệu có trong tệp bạn vừa mở để đảm bảo rằng nó ở đúng định dạng. 
+`matchAnswersFormat(answer)` quét từng dòng của câu trả lời bài thi từ _answer_ của đọc từ tệp theo tên ở `readByFileName()` để tìm dữ liệu hợp lệ và cung cấp phân tích dữ liệu có trong tệp bạn vừa mở để đảm bảo rằng nó ở đúng định dạng. 
 Mỗi tệp dữ liệu chứa một loạt câu trả lời của học sinh ở định dạng sau:
 - Một dòng hợp lệ chứa danh sách 26 giá trị được phân tách bằng dấu phẩy
 - N# cho một học sinh là mục đầu tiên trên dòng. Nó phải chứa ký tự “N” theo sau là 8 ký tự số.
@@ -17,7 +17,7 @@ Mỗi tệp dữ liệu chứa một loạt câu trả lời của học sinh �
 - _return_ **False** cho dòng dữ liệu không hợp lệ trong tệp.
 
 ## 3. `gradingAnswers(answersFile)`
-`gradingAnswers(answersFile)`lấy tệp dữ liệu hợp lệ answersFile từ `readByFileName()` sau khi `matchAnswersFormat(answer)` _return_ **True** để chấm điểm từng bài thi dựa trên tiêu chí đánh giá (rubric) được cung cấp và báo cáo chấm điểm các bài thi gồm 25 câu hỏi, trắc nghiệm dựa trên một chuỗi đại diện cho các câu trả lời là answer_key như sau:
+`gradingAnswers(answersFile)`lấy tệp dữ liệu hợp lệ _answersFile_ từ `readByFileName()` sau khi `matchAnswersFormat(answer)` _return_ **True** để chấm điểm từng bài thi dựa trên tiêu chí đánh giá (rubric) được cung cấp và báo cáo chấm điểm các bài thi gồm 25 câu hỏi, trắc nghiệm dựa trên một chuỗi đại diện cho các câu trả lời là answer_key như sau:
 +4 điểm cho mỗi câu trả lời đúng
 0 điểm cho mỗi câu trả lời bị bỏ qua
 -1 điểm cho mỗi câu trả lời sai
@@ -33,7 +33,10 @@ Tính toán các thống kê sau cho từng lớp:
 - Trả về các câu hỏi bị học sinh sai qua nhiều nhất theo thứ tự: số thứ tự câu hỏi - số lượng học sinh trả lời sai - tỉ lệ bị sai (được chuyển đổi từ `dictToStr (answerDict,answerList)`)
 
 ## 4. `saveGrade(className,scoreList)`
-`saveGrade(className,scoreList)` tạo một tệp “kết quả” chứa các kết quả chi tiết cho từng học sinh trong lớp của bạn. Mỗi dòng của tệp này phải chứa số ID của học sinh, dấu phẩy và sau đó là điểm của họ. Bạn nên đặt tên tệp này dựa trên tên tệp gốc được cung cấp ở `readByFileName()`.
+`saveGrade(className,scoreList)` tạo một tệp “kết quả” chứa các kết quả chi tiết cho từng học sinh trong _scoreList_ từ `gradingAnswers(answersFile)`. Mỗi dòng của tệp chứa số ID của học sinh, dấu phẩy và sau đó là điểm của học sinh, tên tệp này dựa trên tên tệp gốc _className_ được cung cấp ở `readByFileName()`.
+
+## 5. `dictToStr (answerDict,answerList)`
+`dictToStr (answerDict,answerList)` return một chuỗi theo format 'số thứ tự câu hỏi - số lượng học sinh bỏ qua/trả lời sai -  tỉ lệ bị bỏ qua/trả lời sai' từ dictionary _answerDict_ chứa những câu trả lời được bỏ qua hoặc bị trả lời sai và danh sách tổng số lượng câu trả lời _answerList_ trong tệp đang được đọc, để hiện thị trong `gradingAnswers(answersFile)`
 
 ## Supported versions
  Phiên bản 3.9 cho Python
